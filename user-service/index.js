@@ -3,28 +3,9 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import gql from 'graphql-tag';
 import { buildSubgraphSchema } from '@apollo/subgraph';
 import data from './data.json' assert { type: 'json' };
+import { readFileSync } from 'fs';
 
-const typeDefs = gql`
-  extend schema
-    @link(
-      url: "https://specs.apollo.dev/federation/v2.0"
-      import: ["@key", "@shareable"]
-    )
-
-    type Query {
-        me: User
-        user(id: ID!): User
-    }
-
-    type User @key(fields: "id") {
-        id: ID!
-        firstName: String
-        lastName: String
-        email: String
-        age: Int
-        isActive: Boolean
-    }
-`;
+const typeDefs = gql(readFileSync('./schema.graphql', 'utf-8'));
 
 const fetchUserById = (id)=> {
     return data.find(e => e.id == id)

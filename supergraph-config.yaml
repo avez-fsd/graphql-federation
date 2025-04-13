@@ -1,0 +1,9 @@
+subgraphs:
+  users:
+    routing_url: http://localhost:4000
+    schema:
+      file: /Users/avez/Desktop/Projects/Learning/graphql-federation/user-service/schema.graphql
+  orders:
+    routing_url: http://localhost:4002
+    schema:
+      file: /Users/avez/Desktop/Projects/Learning/graphql-federation/order-service/schema.graphql
